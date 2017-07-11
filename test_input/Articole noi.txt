@@ -1,0 +1,44 @@
+
+[ArticoleNoi_P1200069195018]
+Denumire=TELA SDRAIO S.S.
+Serviciu=D
+ContServiciu=707
+[ArticoleNoi_A0000013880]
+Denumire=BORDO IN TESSUTO MM.
+Serviciu=N
+ContServiciu=
+GestiuneImplicita=
+Clasa=
+PretVanzare=
+TVAInclus=D
+
+[ArticoleNoi_A0635002080]
+Denumire=NASTRO POLIPROP.SPIG
+Serviciu=D
+ContServiciu=711
+GestiuneImplicita= simbol gestiune
+Clasa=
+PretVanzare=
+TVAInclus=
+ProcTVA=
+ZeroCuDeducere=
+TipSerie=
+TipContabil= simbol tip contabil
+
+[ArticoleNoi_A1092999899]
+Denumire=NYLON H.150 BLU NOTT
+Serviciu=D
+ContServiciu=768
+GestiuneImplicita=
+Clasa=
+PretVanzare=
+TVAInclus=
+
+[ArticoleNoi_D5001110030]
+Denumire=ETICH.TRANSFERT CHIC
+Serviciu=N
+ContServiciu=
+GestiuneImplicita=
+Clasa=
+PretVanzare=
+TVAInclus=
