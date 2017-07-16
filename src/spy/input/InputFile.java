@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InputFile {
 
@@ -33,5 +34,19 @@ public class InputFile {
 
     public List<InputProperty> getRootProperties() {
         return rootProperties;
+    }
+
+    @Override
+    public String toString() {
+        String result = "File " + fileName + "\n\t";
+        result += rootProperties.stream()
+                .map(InputProperty::toString)
+                .collect(Collectors.joining("\n\t"));
+
+        result += categories.stream()
+                .map(InputCategory::toString)
+                .collect(Collectors.joining("\n\t"));
+
+        return result;
     }
 }

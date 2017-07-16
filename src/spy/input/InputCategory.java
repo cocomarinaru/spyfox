@@ -2,6 +2,7 @@ package spy.input;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputCategory {
 
@@ -38,5 +39,17 @@ public class InputCategory {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        String result = "[" + name + "]\n\t";
+
+        String properties = this.properties.stream()
+                .map(InputProperty::toString)
+                .collect(Collectors.joining("\n\t"));
+
+        return result + properties + '\n';
+
     }
 }

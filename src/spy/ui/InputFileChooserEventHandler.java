@@ -40,6 +40,6 @@ public class InputFileChooserEventHandler implements EventHandler<ActionEvent> {
 
     private void readFile(File file) {
         InputFile inputFile = InputFileReader.readInputFile(file.getPath());
-
+        System.out.println(inputFile);
     }
 }
