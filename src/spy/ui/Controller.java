@@ -1,4 +1,4 @@
-package sample;
+package spy.ui;
 
 public class Controller {
 }
