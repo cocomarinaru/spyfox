@@ -1,5 +1,9 @@
 package spy.input;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import spy.db.FoxProDatabase;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputFileReader {
+    private static final Logger LOGGER = LogManager.getLogger(InputFileReader.class);
 
     private static final Pattern CATEGORY_TITLE_REGEX = Pattern.compile("\\[(.+?)]");
     private static final Pattern PROPERTY_REGEX = Pattern.compile("(.+?)=(.*?)");
@@ -26,8 +31,7 @@ public class InputFileReader {
                 readProperty(inputFile, currentCategory, line);
             }
         } catch (IOException e) {
-            System.out.println("ERROR: Reading " + path + ": " + e.getMessage());
-            e.printStackTrace();
+            LOGGER.error("ERRROR: " + e.getMessage(), e);
             return null;
         }
         return inputFile;
