@@ -33,11 +33,11 @@ public class FoxProDatabase implements DBActions {
         DBContextObjects context = new DBContextObjects();
         context.setConnection(connection);
 
-
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
             context.setStatement(statement);
+
+            ResultSet resultSet = statement.executeQuery(query);
             context.setResultSet(resultSet);
 
             return convertResultSetToRows(resultSet);
