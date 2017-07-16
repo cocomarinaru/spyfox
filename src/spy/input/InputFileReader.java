@@ -1,4 +1,4 @@
-package spy.reader;
+package spy.input;
 
 import java.io.IOException;
 import java.nio.file.Files;

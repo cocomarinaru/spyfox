@@ -1,4 +1,4 @@
-package spy.reader;
+package spy.input;
 
 import java.util.ArrayList;
 import java.util.HashSet;

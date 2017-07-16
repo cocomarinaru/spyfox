@@ -1,4 +1,4 @@
-package spy.reader;
+package spy.input;
 
 public class InputProperty {
 
