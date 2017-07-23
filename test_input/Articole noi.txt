@@ -3,6 +3,7 @@
 Denumire=TELA SDRAIO S.S.
 Serviciu=D
 ContServiciu=707
+
 [ArticoleNoi_A0000013880]
 Denumire=BORDO IN TESSUTO MM.
 Serviciu=N
