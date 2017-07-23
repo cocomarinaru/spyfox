@@ -1,17 +1,27 @@
 package spy.ui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import spy.db.FoxProService;
 
 public class SpyFoxApplication extends Application {
 
 
+    private FoxProService foxProService;
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
+        foxProService = FoxProService.getInstance();
 
         VBox layout = new VBox();
         HBox line = new HBox();
@@ -21,7 +31,7 @@ public class SpyFoxApplication extends Application {
         line.getChildren().add(inputFileButton);
 
 
-        primaryStage.setTitle("SPY Fox");
+        primaryStage.setTitle(UiTexts.PRIMARY_STAGE_TITLE);
         primaryStage.setScene(new Scene(layout, 600, 460));
         primaryStage.show();
 
@@ -30,11 +40,11 @@ public class SpyFoxApplication extends Application {
 
     private Button createInputFileButton(Stage stage) {
 
-        InputFileChooserEventHandler fileChooserEventHandler = new InputFileChooserEventHandler(stage);
+        EventHandler<ActionEvent> eventHandler = new DirectoryChooserEventHandler(stage);
 
         Button inputFileButton = new Button();
-        inputFileButton.setText("Alege fisier text!");
-        inputFileButton.setOnAction(fileChooserEventHandler);
+        inputFileButton.setText("Exporta fisiere in: ?:=");
+        inputFileButton.setOnAction(eventHandler);
 
         return inputFileButton;
     }
