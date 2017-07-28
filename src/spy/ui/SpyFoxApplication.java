@@ -43,7 +43,7 @@ public class SpyFoxApplication extends Application {
         EventHandler<ActionEvent> eventHandler = new DirectoryChooserEventHandler(stage);
 
         Button inputFileButton = new Button();
-        inputFileButton.setText("Exporta fisiere in: ?:=");
+        inputFileButton.setText(UiTexts.DIRECTORY_CHOOSER_TITLE);
         inputFileButton.setOnAction(eventHandler);
 
         return inputFileButton;

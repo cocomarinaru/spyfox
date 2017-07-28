@@ -1,15 +1,15 @@
-package spy.input;
+package spy.output;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InputCategory {
+public class Category {
 
     private final String name;
-    private List<InputProperty> properties;
+    private List<Property> properties;
 
-    public InputCategory(String name) {
+    public Category(String name) {
         this.name = name;
         properties = new ArrayList<>();
     }
@@ -18,7 +18,7 @@ public class InputCategory {
         return name;
     }
 
-    public List<InputProperty> getProperties() {
+    public List<Property> getProperties() {
         return properties;
     }
 
@@ -31,7 +31,7 @@ public class InputCategory {
             return false;
         }
 
-        InputCategory that = (InputCategory) o;
+        Category that = (Category) o;
 
         return name.equals(that.name);
     }
@@ -46,7 +46,7 @@ public class InputCategory {
         String result = "[" + name + "]\n\t";
 
         String properties = this.properties.stream()
-                .map(InputProperty::toString)
+                .map(Property::toString)
                 .collect(Collectors.joining("\n\t"));
 
         return result + properties + '\n';
