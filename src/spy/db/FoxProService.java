@@ -7,14 +7,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FoxProService {
 
     private static FoxProService instance;
+    private Map<String, List<Row>> tables;
 
     private FoxProService() {
+        tables = new HashMap<>();
         readAllDatabases();
     }
 
@@ -30,17 +34,21 @@ public class FoxProService {
 
     private void readAllDatabases() {
 
-        List<String> tablesName = new ArrayList<String>();
-
         try {
             String databasePath = Config.getDatabasePath();
             FoxProDatabase foxProDatabase = new FoxProDatabase(databasePath);
-            tablesName = getAllTableNames(databasePath);
+            List<String> tablesName = getAllTableNames(databasePath);
+
+            for (String table : tablesName) {
+                List<Row> rows = foxProDatabase.query("SELECT * from " + table);
+                tables.put(table, rows);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        tablesName.forEach(System.out::println);
+//        tablesName.forEach(System.out::println);
 
     }
 
