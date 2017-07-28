@@ -1,11 +1,11 @@
-package spy.input;
+package spy.output;
 
-public class InputProperty {
+public class Property {
 
     private final String key;
     private final String value;
 
-    public InputProperty(String key, String value) {
+    public Property(String key, String value) {
         this.key = key;
         this.value = value;
     }
