@@ -54,7 +54,6 @@ public class FoxProService {
             databses.put(table, rows);
         }
 
-        System.out.println();
 
     }
 
