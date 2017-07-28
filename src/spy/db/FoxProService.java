@@ -7,14 +7,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FoxProService {
 
     private static FoxProService instance;
+    private Map<String, List<Row>> databses;
 
     private FoxProService() {
+
         readAllDatabases();
     }
 
@@ -30,17 +34,27 @@ public class FoxProService {
 
     private void readAllDatabases() {
 
-        List<String> tablesName = new ArrayList<String>();
+        this.databses = new HashMap<>();
+
+        List<String> tableNames = new ArrayList<String>();
+
+        String databasePath = Config.getDatabasePath();
+        FoxProDatabase foxProDatabase = new FoxProDatabase(databasePath);
 
         try {
-            String databasePath = Config.getDatabasePath();
-            FoxProDatabase foxProDatabase = new FoxProDatabase(databasePath);
-            tablesName = getAllTableNames(databasePath);
+            tableNames = getAllTableNames(databasePath);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        tablesName.forEach(System.out::println);
+        for (String table : tableNames) {
+            String query = "SELECT * FROM " + table;
+            List<Row> rows = foxProDatabase.query(query);
+            databses.put(table, rows);
+        }
+
+        System.out.println();
 
     }
 
@@ -49,20 +63,14 @@ public class FoxProService {
 
         List<String> tableNames = Files.list(Paths.get(databasePath))
                 .filter(Files::isRegularFile)
+                .map(Path::getFileName)
                 .map(Path::toString)
                 .filter(this::isDBF)
-                .map(p -> this.removePrefix(p, databasePath))
                 .collect(Collectors.toList());
 
         return tableNames;
     }
 
-    private String removePrefix(String path
-            , String prefix) {
-
-        return path.replace(prefix, "");
-
-    }
 
     private boolean isDBF(String path) {
         return path.toLowerCase().endsWith(".dbf");
