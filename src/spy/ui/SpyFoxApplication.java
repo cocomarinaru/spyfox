@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,18 +25,30 @@ public class SpyFoxApplication extends Application {
         foxProService = FoxProService.getInstance();
 
         VBox layout = new VBox();
-        HBox line = new HBox();
-        layout.getChildren().add(line);
+
+        HBox startDateHbox = createDatePicker(UiTexts.START_DATE);
+        HBox endDateHbox = createDatePicker(UiTexts.END_DATE);
+
+        HBox chooseFolderHBox = new HBox();
 
         Button chooseDirectoryButton = createChooseDirectoryButton(primaryStage);
-        line.getChildren().add(chooseDirectoryButton);
+        chooseFolderHBox.getChildren().add(chooseDirectoryButton);
 
+        layout.getChildren().addAll(startDateHbox, endDateHbox, chooseFolderHBox);
 
         primaryStage.setTitle(UiTexts.PRIMARY_STAGE_TITLE);
         primaryStage.setScene(new Scene(layout, 600, 460));
         primaryStage.show();
 
 
+    }
+
+    private HBox createDatePicker(String labelText) {
+        HBox dateHBox = new HBox();
+        Label label = new Label(labelText);
+        DatePicker datePicker = new DatePicker();
+        dateHBox.getChildren().addAll(label, datePicker);
+        return dateHBox;
     }
 
     private Button createChooseDirectoryButton(Stage stage) {
