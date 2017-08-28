@@ -28,6 +28,9 @@ public class Field {
         StringBuilder sb = new StringBuilder();
         sb.append("[ ")
                 .append(columnName)
+                .append("[")
+                .append(value.getClass().getName())
+                .append("]")
                 .append(":")
                 .append(Objects.toString(value, "EMPTY"))
                 .append(" ]");

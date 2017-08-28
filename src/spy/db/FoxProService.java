@@ -19,7 +19,7 @@ public class FoxProService {
 
     private FoxProService() {
 
-        readAllDatabases();
+//        readAllDatabases();
     }
 
     public static FoxProService getInstance() {
@@ -36,7 +36,7 @@ public class FoxProService {
 
         this.databses = new HashMap<>();
 
-        List<String> tableNames = new ArrayList<String>();
+        List<String> tableNames = new ArrayList<>();
 
         String databasePath = Config.getDatabasePath();
         FoxProDatabase foxProDatabase = new FoxProDatabase(databasePath);
@@ -52,6 +52,11 @@ public class FoxProService {
             String query = "SELECT * FROM " + table;
             List<Row> rows = foxProDatabase.query(query);
             databses.put(table, rows);
+        }
+
+        for (Map.Entry<String, List<Row>> entry : databses.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue().size());
+
         }
 
 

@@ -17,21 +17,35 @@ public class SpyFoxApplication extends Application {
 
     private FoxProService foxProService;
 
+    private DatePicker startDatePicker;
+
+    private DatePicker endDatePicker;
+
+    private Stage primaryStage;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-
         foxProService = FoxProService.getInstance();
+        this.primaryStage = primaryStage;
 
+        createLayout(primaryStage);
+
+    }
+
+    private void createLayout(Stage primaryStage) {
         VBox layout = new VBox();
 
-        HBox startDateHbox = createDatePicker(UiTexts.START_DATE);
-        HBox endDateHbox = createDatePicker(UiTexts.END_DATE);
+        this.startDatePicker = new DatePicker();
+        this.endDatePicker = new DatePicker();
+
+        HBox startDateHbox = wrapDatePicker(UiTexts.START_DATE, startDatePicker);
+        HBox endDateHbox = wrapDatePicker(UiTexts.END_DATE, endDatePicker);
 
         HBox chooseFolderHBox = new HBox();
 
-        Button chooseDirectoryButton = createChooseDirectoryButton(primaryStage);
+        Button chooseDirectoryButton = createChooseDirectoryButton(this);
         chooseFolderHBox.getChildren().add(chooseDirectoryButton);
 
         layout.getChildren().addAll(startDateHbox, endDateHbox, chooseFolderHBox);
@@ -39,21 +53,18 @@ public class SpyFoxApplication extends Application {
         primaryStage.setTitle(UiTexts.PRIMARY_STAGE_TITLE);
         primaryStage.setScene(new Scene(layout, 600, 460));
         primaryStage.show();
-
-
     }
 
-    private HBox createDatePicker(String labelText) {
+    private HBox wrapDatePicker(String labelText, DatePicker datePicker) {
         HBox dateHBox = new HBox();
         Label label = new Label(labelText);
-        DatePicker datePicker = new DatePicker();
         dateHBox.getChildren().addAll(label, datePicker);
         return dateHBox;
     }
 
-    private Button createChooseDirectoryButton(Stage stage) {
+    private Button createChooseDirectoryButton(SpyFoxApplication application) {
 
-        EventHandler<ActionEvent> eventHandler = new DirectoryChooserEventHandler(stage);
+        EventHandler<ActionEvent> eventHandler = new DirectoryChooserEventHandler(application);
 
         Button chooseDirectoryButton = new Button();
         chooseDirectoryButton.setText(UiTexts.DIRECTORY_CHOOSER_TITLE);
@@ -65,5 +76,18 @@ public class SpyFoxApplication extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+
+    public DatePicker getStartDatePicker() {
+        return startDatePicker;
+    }
+
+    public DatePicker getEndDatePicker() {
+        return endDatePicker;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 }

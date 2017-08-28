@@ -1,12 +1,13 @@
 package spy.ui;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
+import spy.db.FoxProService;
+import spy.logic.FileGenerator;
 
 import java.io.File;
+import java.time.LocalDate;
 
 /**
  * Created by cocos on 7/18/2017.
@@ -14,11 +15,13 @@ import java.io.File;
 public class DirectoryChooserEventHandler implements EventHandler<ActionEvent> {
 
     private final DirectoryChooser directoryChooser;
-    private final Stage stage;
+    private final SpyFoxApplication application;
+    private FoxProService service = FoxProService.getInstance();
+    private FileGenerator fileGenerator = new FileGenerator();
 
-    public DirectoryChooserEventHandler(Stage stage) {
+    public DirectoryChooserEventHandler(SpyFoxApplication application) {
         directoryChooser = new DirectoryChooser();
-        this.stage = stage;
+        this.application = application;
         configureDirectoryChooser(directoryChooser);
     }
 
@@ -30,9 +33,14 @@ public class DirectoryChooserEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
-        File directory = directoryChooser.showDialog(stage);
+        File directory = directoryChooser.showDialog(application.getPrimaryStage());
         if (directory != null) {
-            System.out.println(directory.getAbsolutePath());
+            String outputDirectory = directory.getAbsolutePath();
+            LocalDate startDate = application.getStartDatePicker().getValue();
+            LocalDate stopDate = application.getEndDatePicker().getValue();
+
+
+            fileGenerator.generate(outputDirectory, startDate, stopDate);
         }
     }
 }

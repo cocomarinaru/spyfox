@@ -19,7 +19,7 @@ public class DBTest {
 
         FoxProDatabase foxProDatabase = new FoxProDatabase(databasePath);
 
-        List<Row> query = foxProDatabase.query("select * from clienti.dbf");
+        List<Row> query = foxProDatabase.query("SELECT * from totcom.dbf where datadoc >= DATE(2014,3,5) and datadoc <= DATE(2017,8,10) ");
 
         query.forEach(System.out::println);
 
